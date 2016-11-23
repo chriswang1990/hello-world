@@ -40,18 +40,30 @@ class MainPage (webapp2.RequestHandler) :
             self.response.out.write(form)
         else:
             self.response.out.write("Thanks! That;s a totally valid day!")
-    
-    def valid_month(month):
-
-        months = ['January', 'February', 'March', 'April', 'May', 'June',
-            'July', 'August', 'September', 'October', 'November', 'December']
-        month_abbvs = dict((m[:3].lower(), m) for m in months
-        if month:
-            month = month[:3].lower()
-            return month_abbvs.get(month) 
-
-    def valid_day(day):
-        if day and day.isdigit():
-                    
-
+                       
 app = webapp2.WSGIApplication([('/', MainPage)], debug = True)
+
+
+def valid_month(month):
+
+    months = ['January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December']
+    month_abbvs = dict((m[:3].lower(), m) for m in months
+    if month:
+        month = month[:3].lower()
+        return month_abbvs.get(month) 
+
+def valid_day(day):
+    if day and day.isdigit():
+        day = int(day)
+        if day in range(1, 32):
+            return day
+
+
+def valid_year(year):
+    if year and year.isdigit():
+        year = int(year)
+        if year in range(1901, 2020):
+            return year
+
+
