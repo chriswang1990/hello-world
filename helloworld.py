@@ -29,17 +29,16 @@ class MainPage(webapp2.RequestHandler):
     def post(self):
 
         user_month = valid_month(self.request.get("month"))
-        user_day = valid_month(self.request.get("day"))
+        user_day = valid_day(self.request.get("day"))
         user_year = valid_year(self.request.get("year"))
 
-        print(user_month)
-        print(user_day)
-        print(user_year)
-
         if not (user_month and user_day and user_year):
+            self.response.out.write(user_month)
+            self.response.out.write(user_day)
+            self.response.out.write(user_year)
             self.response.out.write(form)
         else:
-            self.response.out.write("Thanks! That;s a totally valid day!")
+            self.response.out.write("Thanks! That's a totally valid day!")
 
 
 app = webapp2.WSGIApplication([('/', MainPage)], debug=True)
