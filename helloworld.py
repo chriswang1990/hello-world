@@ -32,6 +32,10 @@ class MainPage(webapp2.RequestHandler):
         user_day = valid_month(self.request.get("day"))
         user_year = valid_year(self.request.get("year"))
 
+        print(user_month)
+        print(user_day)
+        print(user_year)
+
         if not (user_month and user_day and user_year):
             self.response.out.write(form)
         else:
